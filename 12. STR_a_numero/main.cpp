@@ -12,6 +12,7 @@ int main(int argc, char const *argv[])
 
     
     cout<<"Ingrese número"<<endl;
+    cin.ignore();
     cin.getline(text, sizeof(text));
 
 
