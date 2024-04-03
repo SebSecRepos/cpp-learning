@@ -3,8 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\MinGW\\include"
             ],
+            
             "defines": [
                 "_DEBUG",
                 "UNICODE",
@@ -15,6 +17,7 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-msvc-x64"
         }
+       
     ],
     "version": 4
 }

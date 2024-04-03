@@ -38,6 +38,10 @@ void findNode(_Node **node, int n);
 void showTree(_Node **tree, int counter);
 void preOrder(_Node **tree);
 void inOrder(_Node **tree);
+void posOrder(_Node **tree);
+void findToDelete(_Node **tree, int val);
+void deleteNode(_Node **tree);
+_Node *minLeftNode(_Node **tree);
 
 
 int main(int argc, char const *argv[])
@@ -49,9 +53,15 @@ int main(int argc, char const *argv[])
     createNode(&tree, 4);
     createNode(&tree, 20);
 
-    //showTree(&tree, 0);
+    showTree(&tree, 0);
+
     // findNode(&tree, 14);
-    preOrder(&tree);
+    //preOrder(&tree);
+    //inOrder( &tree);
+    //posOrder( &tree);
+
+    findToDelete(&tree, 4);
+    showTree(&tree, 0);
 
     return 0;
 }
@@ -78,8 +88,8 @@ void createNode(_Node **tree, int n){
         }
     }
 }
- 
-  
+
+
 void showTree(_Node **tree, int counter){        //Forma recursiva estructurada de mostrar nodos
     if (*tree == NULL)
     {
@@ -125,15 +135,89 @@ void preOrder(_Node **tree){      //Muestra de nodos de forma recursiva preOrden
         preOrder(&(*tree)->right);
     }
 }
-void inOrder(_Node **tree){     
-                                
+
+void inOrder(_Node **tree){
+
     if (*tree == NULL)
     {
         return;
     }else{
-        preOrder(&(*tree)->left);
+        inOrder(&(*tree)->left);
         cout<<(*tree)->data<<endl;
-        preOrder(&(*tree)->right);
+        inOrder(&(*tree)->right);
+    }
+}
+
+void posOrder(_Node **tree){  //Primero los nodos mas extremos de la izquierda luego los de la derecha y luego el principal
+
+    if( *tree == NULL){
+        return;
+    }else{
+        posOrder( &(*tree)->left );
+        posOrder( &(*tree)->right );
         cout<<(*tree)->data<<endl;
     }
+}
+void findToDelete(_Node **tree, int val){
+    if( *tree == NULL){
+        cout<<"No nodes"<<endl;
+        return;
+    }else if ( val < (*tree)->data ){
+
+        findToDelete(&(*tree)->left, val);
+
+    }else if (val > (*tree)->data){
+
+        findToDelete(&(*tree)->right, val);
+
+    }else if( (*tree)->data == val ){
+        deleteNode(tree);
+    }
+    
+}
+
+
+void deleteNode(_Node **tree) {
+    if (*tree == NULL) {
+        return;
+    } else if ((*tree)->left && (*tree)->right) {
+        // Caso: el nodo a eliminar tiene dos hijos
+        _Node *leftMin = minLeftNode(&(*tree)->right);  
+        (*tree)->data = leftMin->data;
+        deleteNode(&(*tree)->right); // Eliminamos el nodo que movimos
+    } else {
+        _Node *temp = *tree;
+        if ((*tree)->left) {
+            *tree = (*tree)->left;
+        } else if ((*tree)->right) {
+            *tree = (*tree)->right;
+        } else {
+            *tree = NULL;
+        }
+        delete temp;
+    }
+}
+
+
+// void deleteNode(_Node **tree){
+
+//     if( (*tree)->left && (*tree)->right  ){
+        
+//         _Node *leftMin = minLeftNode(&(*tree)->right);  //Le pasamos el nodo de la derecha
+//         (*tree)->data=leftMin->data;
+//         deleteNode(&leftMin);
+//     }
+// }
+
+_Node *minLeftNode(_Node **tree){ //A partir del nodo de la derecha, se va al extremo izquierdo y lo retorna
+
+    if (*tree == NULL)
+    {
+        return NULL;
+    }else if( (*tree)->left ){
+        return minLeftNode(&(*tree)->left);
+    }else{
+        return *tree;
+    }
+    
 }
