@@ -26,8 +26,9 @@ bool fileExist(string fileName){
     }else{
         return false;
     }
+    myFile.close();
 }
-void renameFile(string fileName){
+void deleteFile(string fileName){
 
     if ( fileExist(fileName) )
     {

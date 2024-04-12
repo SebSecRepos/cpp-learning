@@ -17,8 +17,8 @@ void readFile(string fileName);
 
 int main(int argc, char const *argv[])
 {
-    createFile("text.txt", "this is text");
-    readFile("./text.txt");
+    //createFile("text.txt", "this is text");
+    //readFile("./text.txt");
     return 0;
 }
 
@@ -55,5 +55,5 @@ void createFile(string fileName,  string fileContent){
         return;
     }   
 
-    newfile<<fileContent;
+    // newfile<<fileContent;
 }
