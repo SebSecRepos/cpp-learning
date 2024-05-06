@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/seba/Desktop/c++/Socket/Headers",
+                "/home/seba/Desktop/c++/Socket/Sources"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang-16",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}
